@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BusinessCard</string>
+    <string name="logo_content_description">Logo image</string>
+    <string name="contact_details_content_description">Contact details icon</string>
+</resources>
