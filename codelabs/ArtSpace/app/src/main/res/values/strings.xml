@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ArtSpace</string>
+    <string name="gallery_description">Photo of artwork</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="stock_image_of_a_dog">Stock image of a dog</string>
+</resources>
