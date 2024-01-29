@@ -80,13 +80,13 @@ fun RowContentView(
             title = firstCardTitle,
             message = firstCardDescription,
             color = firstCardColor,
-            modifier = Modifier.weight(1f)
+            modifier = modifier
         )
         Card(
             title = secondCardTitle,
             message = secondCardDescription,
             color = secondCardColor,
-            modifier = Modifier.weight(1f)
+            modifier = modifier
         )
     }
 }

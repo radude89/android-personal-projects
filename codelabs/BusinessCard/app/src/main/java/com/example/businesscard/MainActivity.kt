@@ -8,7 +8,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -44,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ContentView()
+                    ContentView(modifier = Modifier)
                 }
             }
         }
@@ -55,12 +54,14 @@ class MainActivity : ComponentActivity() {
 fun ContentView(modifier: Modifier = Modifier) {
     NameView(
         name = "Radu Dan",
-        title = "Mobile Engineer"
+        title = "Mobile Engineer",
+        modifier = modifier
     )
     ContactDetailsView(
         phone = "+40 727801176",
         email = "radu.ionut.dan@gmail.com",
-        github = "radude89"
+        github = "radude89",
+        modifier = modifier
     )
 }
 
@@ -75,13 +76,11 @@ fun NameView(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .fillMaxHeight()
-            .fillMaxWidth()
     ) {
         Image(
             painter = image, 
             contentDescription = stringResource(id = R.string.logo_content_description),
-            modifier = Modifier
+            modifier = modifier
                 .padding(start = 16.dp, end = 16.dp)
                 .background(Color.Gray)
                 .size(200.dp, 200.dp)
@@ -90,7 +89,7 @@ fun NameView(
             text = name,
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier
+            modifier = modifier
                 .padding(top = 8.dp, start = 8.dp, end = 8.dp)
         )
         Text(

@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -36,7 +37,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     GreetingImage(
                         stringResource(id = R.string.happy_birthday_text, "Radu"),
-                        from = "Iris"
+                        from = "Iris",
+                        modifier = Modifier
                     )
                 }
             }
@@ -44,31 +46,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun GreetingText(
-    message: String,
-    from: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier
-    ) {
-        Text(
-            text = message,
-            fontSize = 82.sp,
-            lineHeight = 116.sp,
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = stringResource(R.string.signature_text, from),
-            fontSize = 36.sp,
-            modifier = Modifier
-                .padding(16.dp)
-                .align(alignment = Alignment.CenterHorizontally)
-        )
-    }
-}
 
 @Composable
 fun GreetingImage(
@@ -87,9 +64,35 @@ fun GreetingImage(
         GreetingText(
             message,
             from = from,
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = modifier
                 .padding(16.dp)
+        )
+    }
+}
+
+@Composable
+fun GreetingText(
+    message: String,
+    from: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier
+            .fillMaxHeight()
+    ) {
+        Text(
+            text = message,
+            fontSize = 82.sp,
+            lineHeight = 116.sp,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = stringResource(R.string.signature_text, from),
+            fontSize = 36.sp,
+            modifier = Modifier
+                .padding(16.dp)
+                .align(alignment = Alignment.CenterHorizontally)
         )
     }
 }

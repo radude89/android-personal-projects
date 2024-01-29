@@ -30,9 +30,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -85,11 +82,8 @@ fun TipTimeLayout() {
     val tip = calculateTip(amount, tipPercent, roundUp)
     Column(
         modifier = Modifier
-            .statusBarsPadding()
             .padding(horizontal = 40.dp)
-            .safeDrawingPadding()
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
@@ -164,15 +158,14 @@ fun RoundTheTipRow(
 ) {
     Row(
         modifier = modifier
-            .fillMaxWidth()
-            .size(48.dp),
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = stringResource(R.string.round_up_tip))
         Switch(
             checked = roundUp,
             onCheckedChange = onRoundUpChanged,
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.End)
         )

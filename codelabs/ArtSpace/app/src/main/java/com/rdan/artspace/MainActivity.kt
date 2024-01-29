@@ -5,15 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -60,58 +57,63 @@ class MainActivity : ComponentActivity() {
 private fun ArtSpaceLayout() {
     var result by remember { mutableIntStateOf(1) }
     val imageResource = when (result) {
-        1 -> R.drawable.dog1
-        2 -> R.drawable.dog2
+        0 -> R.drawable.dog1
+        1 -> R.drawable.dog2
         else -> R.drawable.dog3
     }
     val title = when (result) {
-        1 -> "A beautiful brown dog"
-        2 -> "Corbie in action"
+        0 -> "A beautiful brown dog"
+        1 -> "Corbie in action"
         else -> "Dog jumping"
     }
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .statusBarsPadding()
-            .safeDrawingPadding()
-            .verticalScroll(rememberScrollState())
-            .fillMaxWidth()
-            .fillMaxHeight(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Box(modifier = Modifier
+        .fillMaxSize()
     ) {
-        Card(
-            elevation = CardDefaults.cardElevation(defaultElevation = 20.dp),
-            colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.white)),
-            shape = RectangleShape,
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(32.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = painterResource(imageResource),
-                contentDescription = stringResource(R.string.gallery_description),
-                contentScale = ContentScale.FillWidth,
+            Card(
+                elevation = CardDefaults.cardElevation(defaultElevation = 20.dp),
+                colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.white)),
+                shape = RectangleShape,
+            ) {
+                Image(
+                    painter = painterResource(imageResource),
+                    contentDescription = stringResource(R.string.gallery_description),
+                    contentScale = ContentScale.FillWidth,
+                    modifier = Modifier
+                        .padding(16.dp)
+                )
+            }
+            ArtworkDescriptor(
+                title = title,
+                artist = stringResource(R.string.stock_image_of_a_dog),
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 16.dp, bottom = 16.dp)
             )
         }
-        ArtworkDescriptor(
-            title = title,
-            artist = stringResource(R.string.stock_image_of_a_dog),
-            modifier = Modifier
-                .padding(top = 16.dp, bottom = 16.dp)
-        )
+        val maxValue = 2
         DisplayController(
             onTapPrevious = {
-                if (result != 1) {
-                    result -= 1
+                result--
+                if (result == -1) {
+                    result = maxValue
                 }
             },
             onTapNext = {
-                if (result != 3) {
-                    result += 1
+                result++
+                if (result == maxValue + 1) {
+                    result = 0
                 }
             },
             modifier = Modifier
-                .padding(bottom = 16.dp)
+                .fillMaxSize()
+                .padding(bottom = 32.dp)
         )
     }
 }
@@ -145,6 +147,8 @@ private fun DisplayController(
     modifier: Modifier = Modifier
 ) {
     Row(
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.Center,
         modifier = modifier
     ) {
         Button(onTapPrevious) {
