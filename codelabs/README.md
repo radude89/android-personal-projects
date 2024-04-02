@@ -152,3 +152,10 @@ enum class Daypart {
 }
 ```
 </details>
+
+## Unit 4 - Pathway 3
+
+### Useful Links
+
+- [Canonical layouts](https://m3.material.io/foundations/layout/canonical-layouts/overview)
+- [Core app quality](https://developer.android.com/docs/quality-guidelines/core-app-quality)
