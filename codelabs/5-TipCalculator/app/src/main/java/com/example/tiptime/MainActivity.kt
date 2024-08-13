@@ -141,7 +141,12 @@ fun EditNumberField(
 ) {
     TextField(
         value = value,
-        leadingIcon = { Icon(painter = painterResource(leadingIcon), null) },
+        leadingIcon = {
+            Icon(
+                painter = painterResource(leadingIcon),
+                null
+            )
+        },
         onValueChange = onValueChanged,
         label = { Text(stringResource(label)) },
         singleLine = true,
