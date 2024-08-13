@@ -66,8 +66,9 @@ private fun ArtSpaceLayout() {
         1 -> "Corbie in action"
         else -> "Dog jumping"
     }
-    Box(modifier = Modifier
-        .fillMaxSize()
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         Column(
             modifier = Modifier
