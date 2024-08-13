@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -52,17 +53,19 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ContentView(modifier: Modifier = Modifier) {
-    NameView(
-        name = "Radu Dan",
-        title = "Mobile Engineer",
-        modifier = modifier
-    )
-    ContactDetailsView(
-        phone = "+40 727801176",
-        email = "radu.ionut.dan@gmail.com",
-        github = "radude89",
-        modifier = modifier
-    )
+    Box {
+        NameView(
+            name = "Radu Dan",
+            title = "Mobile Engineer",
+            modifier = modifier
+        )
+        ContactDetailsView(
+            phone = "+40 727801176",
+            email = "radu.ionut.dan@gmail.com",
+            github = "radude89",
+            modifier = modifier
+        )
+    }
 }
 
 @Composable
@@ -76,6 +79,7 @@ fun NameView(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
+            .fillMaxSize()
     ) {
         Image(
             painter = image, 
