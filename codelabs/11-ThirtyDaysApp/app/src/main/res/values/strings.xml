@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ThirtyDaysApp</string>
+
+    <string name="day_1_title">Spend 15 Minutes Outdoors</string>
+    <string name="day_1_description">Take a break from your daily routine and step outside. Breathe in fresh air, observe nature, and allow yourself to recharge in the natural surroundings.</string>
+
+    <string name="day_2_title">Listen to Your Favorite Music</string>
+    <string name="day_2_description">Put on your favorite tunes and let the music lift your spirits. Whether you\'re dancing, singing along, or just relaxing, enjoy the moment and let the rhythm take over.</string>
+
+    <string name="day_3_title">Read for 20 Minutes</string>
+    <string name="day_3_description">Pick up a book, article, or any reading material of your choice. Immerse yourself in a different world, learn something new, or simply enjoy the quiet time with a good read.</string>
+
+    <string name="day_4_title">Practice Deep Breathing</string>
+    <string name="day_4_description">Spend a few minutes practicing deep breathing exercises. Inhale slowly, hold, and exhale. This helps to calm the mind, reduce stress, and bring focus to the present moment.</string>
+
+    <string name="day_5_title">Write Down Three Things You\'re Grateful For</string>
+    <string name="day_5_description">Take a moment to reflect on your day and jot down three things you\'re grateful for. This simple act can boost your mood and bring a sense of positivity and appreciation.</string>
+
+    <string name="day_6_title">Stretch Your Body</string>
+    <string name="day_6_description">Engage in a few minutes of gentle stretching. Focus on areas where you feel tight or tense, and allow your muscles to relax. This can improve flexibility and relieve stress.</string>
+</resources>

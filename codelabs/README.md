@@ -159,3 +159,8 @@ enum class Daypart {
 
 - [Canonical layouts](https://m3.material.io/foundations/layout/canonical-layouts/overview)
 - [Core app quality](https://developer.android.com/docs/quality-guidelines/core-app-quality)
+
+## Material Theming codelabs
+
+- [Basic notions](https://developer.android.com/codelabs/basic-android-kotlin-compose-material-theming#0)
+    - Shape, Color, Typography, basic stuff
