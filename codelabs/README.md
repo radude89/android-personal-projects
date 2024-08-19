@@ -164,3 +164,9 @@ enum class Daypart {
 
 - [Basic notions](https://developer.android.com/codelabs/basic-android-kotlin-compose-material-theming#0)
     - Shape, Color, Typography, basic stuff
+
+## Architecture Components
+
+- _Source [here](https://developer.android.com/codelabs/basic-android-kotlin-compose-viewmodel-and-state?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-4-pathway-1%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-viewmodel-and-state#3)_
+
+<img src="https://developer.android.com/static/codelabs/basic-android-kotlin-compose-viewmodel-and-state/img/6eaee5b38ec247ae_1920.png" />

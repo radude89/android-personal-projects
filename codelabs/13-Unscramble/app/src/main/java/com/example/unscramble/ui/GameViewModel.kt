@@ -39,6 +39,7 @@ class GameViewModel: ViewModel() {
     fun updateUserGuess(guessedWord: String) {
         userGuess = guessedWord
     }
+
     fun checkUserGuess() {
         if (userGuess.equals(currentWord, ignoreCase = true)) {
             val updatedScore = _uiState.value.score.plus(SCORE_INCREASE)
@@ -90,7 +91,7 @@ class GameViewModel: ViewModel() {
     private fun shuffleCurrentWord(word: String): String {
         val tempWord = word.toCharArray()
         tempWord.shuffle()
-        while (String(tempWord).equals(word)) {
+        while (String(tempWord) == word) {
             tempWord.shuffle()
         }
         return String(tempWord)

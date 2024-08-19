@@ -74,7 +74,6 @@ fun GameScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Text(
             text = stringResource(R.string.app_name),
             style = typography.titleLarge,
