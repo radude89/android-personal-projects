@@ -33,6 +33,7 @@
     <string name="tennis">Tennis</string>
 
     <string name="sports_list_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices congue rutrum.</string>
+    <string name="sport_detail_text_2">Small description</string>
     <string name="sport_detail_text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Praesent ultrices congue rutrum. Phasellus elementum ipsum ac convallis aliquam. Suspendisse

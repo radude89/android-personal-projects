@@ -60,7 +60,7 @@ fun ReplyDetailsScreen(
     BackHandler {
         onBackPressed()
     }
-    Box(modifier = modifier) {
+    Box(modifier) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()

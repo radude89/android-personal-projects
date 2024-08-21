@@ -45,7 +45,7 @@ object LocalSportsDataProvider {
                 olympic = true,
                 imageResourceId = R.drawable.ic_badminton_square,
                 sportsImageBanner = R.drawable.ic_badminton_banner,
-                sportDetails = R.string.sport_detail_text
+                sportDetails = R.string.sport_detail_text_2
             ),
             Sport(
                 id = 3,
@@ -65,7 +65,7 @@ object LocalSportsDataProvider {
                 olympic = false,
                 imageResourceId = R.drawable.ic_bowling_square,
                 sportsImageBanner = R.drawable.ic_bowling_banner,
-                sportDetails = R.string.sport_detail_text
+                sportDetails = R.string.sport_detail_text_2
             ),
             Sport(
                 id = 5,
