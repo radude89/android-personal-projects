@@ -170,3 +170,75 @@ enum class Daypart {
 - _Source [here](https://developer.android.com/codelabs/basic-android-kotlin-compose-viewmodel-and-state?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-4-pathway-1%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-viewmodel-and-state#3)_
 
 <img src="https://developer.android.com/static/codelabs/basic-android-kotlin-compose-viewmodel-and-state/img/6eaee5b38ec247ae_1920.png" />
+
+## Unit 5 - Pathway 1
+
+### Coroutines
+
+If you have coroutines that were started on the main thread, and you want to move certain operations off the main thread, then you can use withContext to switch the dispatcher being used for that work. Choose appropriately from the available dispatchers: Main, Default, and IO depending on the type of operation it is. Then that work can be assigned to a thread (or group of threads called a thread pool) designated for that purpose. Coroutines can suspend themselves, and the dispatcher also influences how they resume.
+
+_Source [here](https://developer.android.com/codelabs/basic-android-kotlin-compose-coroutines-kotlin-playground?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-5-pathway-1%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-coroutines-kotlin-playground#4)_
+
+<details>
+  <summary>Code</summary>
+
+```kotlin
+import kotlinx.coroutines.*
+
+fun main() {
+    runBlocking {
+        println("The weather today is lovely <3")
+        println(getWeatherReport())
+        println("Have a good day!\n")
+
+	    println("${Thread.currentThread().name} - runBlocking function")
+        launch {
+            println("${Thread.currentThread().name} - launch function")
+        	withContext(Dispatchers.Default) {
+                println("${Thread.currentThread().name} - withContext function")
+                delay(1000)
+                println("10 results found.")
+            }
+            println("${Thread.currentThread().name} - end of launch function")
+        }
+        println("Loading...")
+    }
+}
+
+suspend fun getWeatherReport() = coroutineScope {
+    val forecast = async { getForecast() }
+    val temperature = async { getTemperature() }
+
+    delay(200)
+    temperature.cancel()
+
+    "${forecast.await()}"
+}
+
+suspend fun getForecast(): String {
+    delay(1000)
+    return "Sunny"
+}
+
+suspend fun getTemperature(): String {
+    delay(500)
+	return "30\u00b0C"
+}
+```
+
+Prints:
+
+```plaintext
+The weather today is lovely <3
+Sunny
+Have a good day!
+
+main @coroutine#1 - runBlocking function
+Loading...
+main @coroutine#4 - launch function
+DefaultDispatcher-worker-1 @coroutine#4 - withContext function
+10 results found.
+main @coroutine#4 - end of launch function
+```
+
+</details>
