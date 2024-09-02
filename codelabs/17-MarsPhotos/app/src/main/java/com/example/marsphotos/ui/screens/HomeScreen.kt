@@ -15,10 +15,8 @@
  */
 package com.example.marsphotos.ui.screens
 
-import android.provider.ContactsContract.Contacts.Photo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -117,7 +115,7 @@ private fun ErrorScreen(
             text = stringResource(id = R.string.loading_failed),
             modifier = Modifier.padding(16.dp)
         )
-        Button(onClick = retryAction) {
+        Button(retryAction) {
             Text(stringResource(R.string.retry))
         }
     }
