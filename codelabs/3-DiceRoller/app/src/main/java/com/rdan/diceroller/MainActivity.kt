@@ -64,11 +64,13 @@ fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
             painter = painterResource(id = imageResource),
             contentDescription = "1"
         )
-        Spacer(modifier = Modifier
-            .height(16.dp))
+        Spacer(
+            modifier = Modifier
+                .height(16.dp)
+        )
         Button(onClick = { result = (1..6).random() }) {
             Text(
-                text = stringResource(id = R.string.roll)
+                text = stringResource(R.string.roll)
             )
         }
     }

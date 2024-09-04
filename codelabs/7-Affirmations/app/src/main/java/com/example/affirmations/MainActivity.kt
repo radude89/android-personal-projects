@@ -85,7 +85,7 @@ private fun AffirmationCard(
     affirmation: Affirmation,
     modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier) {
+    Card(modifier) {
         Column {
             Image(
                 painter = painterResource(affirmation.imageResourceId),
