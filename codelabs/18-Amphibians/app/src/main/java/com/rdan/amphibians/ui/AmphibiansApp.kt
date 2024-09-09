@@ -54,7 +54,7 @@ private fun AmphibiansTopBar() {
         title = {
             Text(
                 text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.displayLarge
+                style = MaterialTheme.typography.titleLarge
             )
         }
     )
