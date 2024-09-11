@@ -12,8 +12,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.rdan.amphibians.AmphibiansApplication
 import com.rdan.amphibians.data.AmphibiansRepository
 import com.rdan.amphibians.network.Amphibian
-import com.rdan.amphibians.network.mockedAmphibians
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 sealed interface AmphibiansUiState {
     data class Success(val amphibians: List<Amphibian>) : AmphibiansUiState
@@ -31,15 +31,21 @@ class AmphibianListViewModel(
         getAmphibians()
     }
 
-    private fun getAmphibians() {
+    fun getAmphibians() {
         viewModelScope.launch {
             uiState = AmphibiansUiState.Loading
-            uiState = AmphibiansUiState.Success(mockedAmphibians)
+            uiState = try {
+                AmphibiansUiState.Success(
+                    amphibiansRepository.getAmphibians()
+                )
+            } catch (e: IOException) {
+                AmphibiansUiState.Error
+            }
         }
     }
 
     companion object {
-        val factory: ViewModelProvider.Factory = viewModelFactory {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[APPLICATION_KEY] as AmphibiansApplication)
                 val amphibiansRepository = application.container.amphibiansRepository
