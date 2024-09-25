@@ -19,6 +19,7 @@ abstract  class InventoryDatabase : RoomDatabase() {
                     InventoryDatabase::class.java,
                     "item_database"
                 )
+                    .fallbackToDestructiveMigration()
                     .build()
                     .also { Instance = it }
             }
