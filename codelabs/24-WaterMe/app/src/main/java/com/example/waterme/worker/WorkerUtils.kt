@@ -16,6 +16,7 @@
 
 package com.example.waterme.worker
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -33,6 +34,7 @@ import com.example.waterme.REQUEST_CODE
 import com.example.waterme.VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION
 import com.example.waterme.VERBOSE_NOTIFICATION_CHANNEL_NAME
 
+@SuppressLint("MissingPermission")
 fun makePlantReminderNotification(
     message: String,
     context: Context

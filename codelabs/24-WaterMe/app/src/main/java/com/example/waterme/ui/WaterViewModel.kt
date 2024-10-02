@@ -25,12 +25,18 @@ import com.example.waterme.WaterMeApplication
 import com.example.waterme.data.Reminder
 import com.example.waterme.data.WaterRepository
 
-class WaterViewModel(private val waterRepository: WaterRepository) : ViewModel() {
+class WaterViewModel(
+    private val waterRepository: WaterRepository
+) : ViewModel() {
 
     internal val plants = waterRepository.plants
 
     fun scheduleReminder(reminder: Reminder) {
-        waterRepository.scheduleReminder(reminder.duration, reminder.unit, reminder.plantName)
+        waterRepository.scheduleReminder(
+            reminder.duration,
+            reminder.unit,
+            reminder.plantName
+        )
     }
 
     /**

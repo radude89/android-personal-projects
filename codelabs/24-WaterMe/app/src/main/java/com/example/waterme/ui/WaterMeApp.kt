@@ -61,7 +61,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import java.util.concurrent.TimeUnit
 
 @Composable
-fun WaterMeApp(waterViewModel: WaterViewModel = viewModel(factory = WaterViewModel.Factory)) {
+fun WaterMeApp(
+    waterViewModel: WaterViewModel = viewModel(
+        factory = WaterViewModel.Factory
+    )
+) {
     val layoutDirection = LocalLayoutDirection.current
     WaterMeTheme {
         Surface(

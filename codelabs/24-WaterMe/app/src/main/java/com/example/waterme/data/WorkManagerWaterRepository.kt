@@ -23,6 +23,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.waterme.model.Plant
 import com.example.waterme.worker.WaterReminderWorker
+import com.example.waterme.worker.WaterReminderWorker.Companion.nameKey
 import java.util.concurrent.TimeUnit
 
 class WorkManagerWaterRepository(context: Context) : WaterRepository {
@@ -31,5 +32,23 @@ class WorkManagerWaterRepository(context: Context) : WaterRepository {
     override val plants: List<Plant>
         get() = DataSource.plants
 
-    override fun scheduleReminder(duration: Long, unit: TimeUnit, plantName: String) {}
+    override fun scheduleReminder(
+        duration: Long,
+        unit: TimeUnit,
+        plantName: String
+    ) {
+        val dataBuilder = Data.Builder()
+        dataBuilder.putString(nameKey, plantName)
+
+        val reminderBuilder = OneTimeWorkRequestBuilder<WaterReminderWorker>()
+            .setInitialDelay(duration, unit)
+            .setInputData(dataBuilder.build())
+            .build()
+
+        workManager.enqueueUniqueWork(
+            plantName + duration,
+            ExistingWorkPolicy.REPLACE,
+            reminderBuilder
+        )
+    }
 }
