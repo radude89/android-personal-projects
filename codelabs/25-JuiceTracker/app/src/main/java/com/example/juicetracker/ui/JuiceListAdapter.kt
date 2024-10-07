@@ -17,13 +17,16 @@ package com.example.juicetracker.ui
 
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,13 +48,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.juicetracker.R
 import com.example.juicetracker.data.Juice
 import com.example.juicetracker.data.JuiceColor
+import com.google.accompanist.themeadapter.material3.Mdc3Theme
 
 class JuiceListAdapter(
     private var onEdit: (Juice) -> Unit,
     private var onDelete: (Juice) -> Unit
 ) : ListAdapter<Juice, JuiceListAdapter.JuiceListViewHolder>(JuiceDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JuiceListViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): JuiceListViewHolder {
         return JuiceListViewHolder(
             ComposeView(parent.context),
             onEdit,
@@ -67,9 +74,19 @@ class JuiceListAdapter(
         private val onEdit: (Juice) -> Unit,
         private val onDelete: (Juice) -> Unit
     ) : RecyclerView.ViewHolder(composeView) {
-
         fun bind(input: Juice) {
-
+            composeView.setContent {
+                ListItem(
+                    input,
+                    onDelete,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            onEdit(input)
+                        }
+                        .padding(vertical = 8.dp, horizontal = 16.dp),
+                )
+            }
         }
     }
 }
@@ -90,7 +107,21 @@ fun ListItem(
     onDelete: (Juice) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
+    Mdc3Theme {
+        Row(
+            modifier = modifier,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            JuiceIcon(input.color)
+            JuiceDetails(input, Modifier.weight(1f))
+            DeleteButton(
+                onDelete = {
+                    onDelete(input)
+                },
+                modifier = Modifier.align(Alignment.Top)
+            )
+        }
+    }
 }
 
 @Composable
@@ -162,6 +193,22 @@ fun RatingDisplay(
     }
 }
 
+@Composable
+fun DeleteButton(
+    onDelete: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    IconButton(
+        onClick = { onDelete() },
+        modifier = modifier
+    ) {
+        Icon(
+            painter = painterResource(R.drawable.ic_delete),
+            contentDescription = stringResource(R.string.delete)
+        )
+    }
+}
+
 @Preview
 @Composable
 fun PreviewJuiceIcon() {
@@ -178,5 +225,26 @@ fun PreviewJuiceDetails() {
             "Apple, caarrot, beet, and lemon",
             "Red", 4
         )
+    )
+}
+
+@Preview
+@Composable
+fun PreviewDeleteIcon() {
+    DeleteButton({})
+}
+
+@Preview
+@Composable
+fun PreviewListItem() {
+    ListItem(
+        Juice(
+            1,
+            "Sweet Beet",
+            "Apple, carrot, beet, and lemon",
+            "Red",
+            4
+        ),
+        onDelete = {}
     )
 }
