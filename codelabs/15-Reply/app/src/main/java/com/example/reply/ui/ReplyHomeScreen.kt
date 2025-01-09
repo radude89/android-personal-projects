@@ -133,13 +133,12 @@ fun ReplyHomeScreen(
                 modifier = modifier
             )
         } else {
-            val detailsScreenContentDescription = stringResource(R.string.details_screen)
             ReplyDetailsScreen(
                 replyUiState = replyUiState,
                 isFullScreen = true,
                 onBackPressed = onDetailScreenBackPressed,
                 modifier = modifier
-                    .testTag(detailsScreenContentDescription),
+                    .testTag(stringResource(R.string.details_screen)),
             )
         }
     }
