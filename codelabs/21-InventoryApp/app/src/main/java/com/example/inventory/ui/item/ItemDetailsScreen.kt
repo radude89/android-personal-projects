@@ -169,7 +169,8 @@ private fun ItemDetailsBody(
 
 @Composable
 fun ItemDetails(
-    item: Item, modifier: Modifier = Modifier
+    item: Item,
+    modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier,
@@ -213,12 +214,17 @@ fun ItemDetails(
 
 @Composable
 private fun ItemDetailsRow(
-    @StringRes labelResID: Int, itemDetail: String, modifier: Modifier = Modifier
+    @StringRes labelResID: Int,
+    itemDetail: String,
+    modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier) {
+    Row(modifier) {
         Text(stringResource(labelResID))
-        Spacer(modifier = Modifier.weight(1f))
-        Text(text = itemDetail, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.weight(1f))
+        Text(
+            text = itemDetail,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
 
