@@ -16,6 +16,7 @@
 
 package com.example.inventory.ui.item
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -39,6 +40,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.inventory.InventoryTopAppBar
@@ -61,7 +63,9 @@ fun ItemEntryScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     canNavigateBack: Boolean = true,
-    viewModel: ItemEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: ItemEntryViewModel = viewModel(
+        factory = AppViewModelProvider.Factory
+    )
 ) {
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
@@ -84,8 +88,10 @@ fun ItemEntryScreen(
             },
             modifier = Modifier
                 .padding(
-                    start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
-                    end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                    start = innerPadding
+                        .calculateStartPadding(LocalLayoutDirection.current),
+                    end = innerPadding
+                        .calculateEndPadding(LocalLayoutDirection.current),
                     top = innerPadding.calculateTopPadding()
                 )
                 .verticalScroll(rememberScrollState())
@@ -102,8 +108,10 @@ fun ItemEntryBody(
     modifier: Modifier = Modifier
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
-        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+        verticalArrangement = Arrangement
+            .spacedBy(dimensionResource(R.dimen.padding_large)),
+        modifier = modifier
+            .padding(dimensionResource(R.dimen.padding_medium))
         ) {
         ItemInputForm(
             itemDetails = itemUiState.itemDetails,
@@ -122,65 +130,62 @@ fun ItemEntryBody(
 }
 
 @Composable
-fun ItemInputForm(
+private fun ItemInputForm(
     itemDetails: ItemDetails,
     modifier: Modifier = Modifier,
-    onValueChange: (ItemDetails) -> Unit = {},
-    enabled: Boolean = true
+    onValueChange: (ItemDetails) -> Unit = {}
 ) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
-        OutlinedTextField(
-            value = itemDetails.name,
-            onValueChange = { onValueChange(itemDetails.copy(name = it)) },
-            label = { Text(stringResource(R.string.item_name_req)) },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-            ),
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            singleLine = true
+        ItemInputField(
+            value = TextFieldValue(itemDetails.name),
+            onValueChange = { onValueChange(itemDetails.copy(name = it.text)) },
+            labelID = R.string.item_name_req
         )
-        OutlinedTextField(
-            value = itemDetails.price,
-            onValueChange = { onValueChange(itemDetails.copy(price = it)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-            label = { Text(stringResource(R.string.item_price_req)) },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-            ),
-            leadingIcon = { Text(Currency.getInstance(Locale.getDefault()).symbol) },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            singleLine = true
+        ItemInputField(
+            value = TextFieldValue(itemDetails.price),
+            onValueChange = { onValueChange(itemDetails.copy(price = it.text)) },
+            labelID = R.string.item_price_req,
+            keyboardType = KeyboardType.Decimal
         )
-        OutlinedTextField(
-            value = itemDetails.quantity,
-            onValueChange = { onValueChange(itemDetails.copy(quantity = it)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            label = { Text(stringResource(R.string.quantity_req)) },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-            ),
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            singleLine = true
+        ItemInputField(
+            value = TextFieldValue(itemDetails.quantity),
+            onValueChange = { onValueChange(itemDetails.copy(quantity = it.text)) },
+            labelID = R.string.quantity_in_stock,
+            keyboardType = KeyboardType.Number
         )
-        if (enabled) {
-            Text(
-                text = stringResource(R.string.required_fields),
-                modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
-            )
-        }
+        Text(
+            text = stringResource(R.string.required_fields),
+            modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
+        )
     }
+}
+
+@Composable
+private fun ItemInputField(
+    value: TextFieldValue,
+    onValueChange: (TextFieldValue) -> Unit = {},
+    @StringRes labelID: Int,
+    keyboardType: KeyboardType = KeyboardType.Text
+) {
+    val fieldColor = MaterialTheme.colorScheme.secondaryContainer
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(stringResource(labelID)) },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType
+        ),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedContainerColor = fieldColor,
+            unfocusedContainerColor = fieldColor,
+            disabledContainerColor = fieldColor,
+        ),
+        modifier = Modifier.fillMaxWidth(),
+        singleLine = true
+    )
 }
 
 @Preview(showBackground = true)

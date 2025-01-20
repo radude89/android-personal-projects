@@ -159,7 +159,8 @@ private fun InventoryList(
 
 @Composable
 private fun InventoryItem(
-    item: Item, modifier: Modifier = Modifier
+    item: Item,
+    modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier,
@@ -195,7 +196,24 @@ private fun InventoryItem(
 fun HomeBodyPreview() {
     InventoryTheme {
         HomeBody(listOf(
-            Item(1, "Game", 100.0, 20), Item(2, "Pen", 200.0, 30), Item(3, "TV", 300.0, 50)
+            Item(
+                1,
+                "Game",
+                100.0,
+                20
+            ),
+            Item(
+                2,
+                "Pen",
+                200.0,
+                30
+            ),
+            Item(
+                3,
+                "TV",
+                300.0,
+                50
+            )
         ), onItemClick = {})
     }
 }
