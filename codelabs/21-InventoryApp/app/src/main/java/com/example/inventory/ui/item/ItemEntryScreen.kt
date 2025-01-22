@@ -61,7 +61,6 @@ object ItemEntryDestination : NavigationDestination {
 @Composable
 fun ItemEntryScreen(
     navigateBack: () -> Unit,
-    onNavigateUp: () -> Unit,
     canNavigateBack: Boolean = true,
     viewModel: ItemEntryViewModel = viewModel(
         factory = AppViewModelProvider.Factory
@@ -73,7 +72,7 @@ fun ItemEntryScreen(
             InventoryTopAppBar(
                 title = stringResource(ItemEntryDestination.titleRes),
                 canNavigateBack = canNavigateBack,
-                navigateUp = onNavigateUp
+                navigateUp = navigateBack
             )
         }
     ) { innerPadding ->
@@ -124,7 +123,7 @@ fun ItemEntryBody(
             shape = MaterialTheme.shapes.small,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = stringResource(R.string.save_action))
+            Text(stringResource(R.string.save_action))
         }
     }
 }

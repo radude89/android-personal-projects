@@ -55,8 +55,7 @@ fun InventoryNavHost(
         }
         composable(route = ItemEntryDestination.route) {
             ItemEntryScreen(
-                navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() }
+                navigateBack = { navController.popBackStack() }
             )
         }
         composable(
@@ -72,13 +71,12 @@ fun InventoryNavHost(
         }
         composable(
             route = ItemEditDestination.routeWithArgs,
-            arguments = listOf(navArgument(ItemEditDestination.itemIdArg) {
+            arguments = listOf(navArgument(ItemEditDestination.ITEM_ID_ARG) {
                 type = NavType.IntType
             })
         ) {
             ItemEditScreen(
-                navigateBack = { navController.popBackStack() },
-                onNavigateUp = { navController.navigateUp() }
+                navigateBack = { navController.popBackStack() }
             )
         }
     }

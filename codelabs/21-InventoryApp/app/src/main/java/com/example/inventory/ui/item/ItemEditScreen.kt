@@ -40,15 +40,14 @@ import kotlinx.coroutines.launch
 object ItemEditDestination : NavigationDestination {
     override val route = "item_edit"
     override val titleRes = R.string.edit_item_title
-    const val itemIdArg = "itemId"
-    val routeWithArgs = "$route/{$itemIdArg}"
+    const val ITEM_ID_ARG = "itemId"
+    val routeWithArgs = "$route/{$ITEM_ID_ARG}"
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemEditScreen(
     navigateBack: () -> Unit,
-    onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ItemEditViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -58,7 +57,7 @@ fun ItemEditScreen(
             InventoryTopAppBar(
                 title = stringResource(ItemEditDestination.titleRes),
                 canNavigateBack = true,
-                navigateUp = onNavigateUp
+                navigateUp = navigateBack
             )
         },
         modifier = modifier
@@ -87,6 +86,6 @@ fun ItemEditScreen(
 @Composable
 fun ItemEditScreenPreview() {
     InventoryTheme {
-        ItemEditScreen(navigateBack = { /*Do nothing*/ }, onNavigateUp = { /*Do nothing*/ })
+        ItemEditScreen(navigateBack = { /*Do nothing*/ })
     }
 }

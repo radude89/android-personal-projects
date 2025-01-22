@@ -42,17 +42,16 @@ class ItemEntryViewModel(
      * a validation for input values.
      */
     fun updateUiState(itemDetails: ItemDetails) {
-        itemUiState =
-            ItemUiState(
-                itemDetails = itemDetails,
-                isEntryValid = validateInput(itemDetails)
-            )
+        itemUiState = ItemUiState(
+            itemDetails = itemDetails,
+            isEntryValid = validateInput(itemDetails)
+        )
     }
 
     private fun validateInput(
-        uiState: ItemDetails = itemUiState.itemDetails
+        itemDetails: ItemDetails = itemUiState.itemDetails
     ): Boolean {
-        return with(uiState) {
+        return with(itemDetails) {
             name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
         }
     }
