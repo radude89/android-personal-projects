@@ -17,8 +17,6 @@ class GameViewModel: ViewModel() {
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
 
     private var _count = 0
-    val count: Int
-        get() = _count
 
     private lateinit var currentWord: String
 
